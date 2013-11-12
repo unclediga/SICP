@@ -59,13 +59,103 @@
 
 ;; -- 2.20 ------------------------------
 (define (same-parity x . z)
-    (define (ev-odd? itm)
-      (if (even? x)
-          (even? itm)
-          (odd? itm)))
+  (define (ev-odd? itm)
+    (if (even? x)
+        (even? itm)
+        (odd? itm)))
   (define (s-p lst)
     (cond ((null? lst) '())
           ((ev-odd? (car lst)) (cons (car lst) (s-p (cdr lst))))
           (else (s-p (cdr lst)))))
   (s-p z))
 
+;; -- 2.21 ------------------------------
+(define (square-list1 items)
+  (if (null? items)
+      '()
+      (cons (* (car items) (car items)) (square-list1 (cdr items)))))
+;; -------------
+(define (square-list2 items)
+  (map (lambda(x)(* x x)) items))
+;; -- 2.22 ------------------------------
+;; NO WORK
+(define nil '())
+(define (square x)(* x x))
+(define (square-listHugo1 items)
+  (define (iter things answer)
+    (if (null? things)
+        answer
+        (iter (cdr things)
+              (cons (square (car things))
+                    answer))))
+  (iter items nil))
+;; NO WORK
+(define (square-listHugo2 items)
+  (define (iter things answer)
+    (if (null? things)
+        answer
+        (iter (cdr things)
+              (cons answer
+                    (square (car things))))))
+  (iter items nil))
+;; GOOD ---
+(define (square-list3 items)
+  (define (iter things answer)
+    (if (null? things)
+        answer
+        (iter (cdr things) (append answer (list (square (car things)))))))
+  (iter items nil))
+
+;; -- 2.23 -------------------------------
+(define (my-for-each f lst)
+  (if (null? lst)
+      nil
+      (cons (f (car lst))(f (cdr lst))))
+  nil)
+;; with 'cond' you may excecute more then one form
+;; with 'if'  - single only
+(define (your-for-each proc items)
+  (cond ((not (null? items))
+         (proc (car items)) (your-for-each proc (cdr items)))))
+;; -- 2.27 -------------------------------
+(define (deep-reverse lst)
+  (define (rev l r)
+    (if (null? l)
+        r
+        (rev (cdr l) (cons (if (pair? (car l))
+                               (deep-reverse (car l)) 
+                               (car l))
+                           r))))
+  (rev lst '()))
+
+;; -- 2.28 ---------------------------------
+(define (fringe x)
+  (cond ((null? x) '())
+        ((not (pair? x)) (list x))
+        (else (append (fringe (car x))
+                      (fringe (cdr x))))))
+;; -- 2.29 ---------------------------------
+(define (make-mobile left right)
+  (list left right))
+
+(define (make-branch length structure)
+  (list length structure))
+
+(define (left-branch mob)
+  (if (pair? mob)
+      (car mob)
+      nil))
+(define (right-branch mob)
+  (if (pair? mob)
+      (cdr mob)
+      nil))
+
+(define (branch-length br)
+  (car br))
+
+(define (branch-structure br)
+  (cdr br))
+
+(define (total-weight br)
+  br)
+  
