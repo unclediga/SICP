@@ -147,15 +147,26 @@
       nil))
 (define (right-branch mob)
   (if (pair? mob)
-      (cdr mob)
+      (cadr mob)
       nil))
 
 (define (branch-length br)
   (car br))
 
 (define (branch-structure br)
-  (cdr br))
+  (cadr br))
 
 (define (total-weight br)
-  br)
-  
+  (cond ((null? br) 0)
+        ((not (pair? (branch-structure br))) (branch-structure br))
+        (else (+  (total-weight (left-branch br))
+                  (total-weight (right-branch br))))))
+
+(total-weight (branch-structure (make-mobile (make-branch 2 
+                                            (make-mobile (make-branch 1 1)
+                                                         (make-branch 1 2)))
+                               (make-branch 2 
+                                            (make-mobile (make-branch 1 1)
+                                                         (make-branch 1 2))))))
+
+
