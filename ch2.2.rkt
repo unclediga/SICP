@@ -141,10 +141,12 @@
 (define (make-branch length structure)
   (list length structure))
 
+;; -- (a) --
 (define (left-branch mob)
   (if (pair? mob)
       (car mob)
       nil))
+
 (define (right-branch mob)
   (if (pair? mob)
       (cadr mob)
@@ -156,17 +158,130 @@
 (define (branch-structure br)
   (cadr br))
 
-(define (total-weight br)
-  (cond ((null? br) 0)
-        ((not (pair? (branch-structure br))) (branch-structure br))
-        (else (+  (total-weight (left-branch br))
-                  (total-weight (right-branch br))))))
+;; -- (b) --
 
-(total-weight (branch-structure (make-mobile (make-branch 2 
-                                            (make-mobile (make-branch 1 1)
-                                                         (make-branch 1 2)))
-                               (make-branch 2 
-                                            (make-mobile (make-branch 1 1)
-                                                         (make-branch 1 2))))))
+(define (branch-weight br)
+  (mobile-weight (branch-structure br)))
 
 
+(define (mobile-weight mob)
+  (if (pair? mob)
+      (+ (branch-weight (left-branch mob))
+         (branch-weight (right-branch mob)))
+      mob))
+
+;; 
+(define (total-weight mobile)
+  (mobile-weight mobile))
+
+;(total-weight
+; (make-mobile (make-branch 2 
+;                           (make-mobile (make-branch 1 1)
+;                                        (make-branch 1 
+;                                                     (make-mobile (make-branch 1 10)
+;                                                                  (make-branch 2 5)))))
+;              (make-branch 2 
+;                           (make-mobile (make-branch 1 1)
+;                                        (make-branch 1 2)))))
+
+;(total-weight
+; (make-mobile (make-branch 1 1)
+;              (make-branch 1 2)))
+;; -- (c) --
+
+(define (mobile-balansed? mob)
+  (let ((left-b (left-branch mob))
+        (right-b (right-branch mob)))
+    (if (pair? mob)
+        (and 
+         (= 
+          (* (branch-length left-b) (branch-weight left-b))
+          (* (branch-length right-b) (branch-weight right-b)))
+         (mobile-balansed? (branch-structure left-b))
+         (mobile-balansed? (branch-structure right-b)))
+        #t)))
+
+
+;(mobile-balansed? 
+; (make-mobile (make-branch 2 
+;                           (make-mobile (make-branch 1 15)
+;                                        (make-branch 1 
+;                                                     (make-mobile (make-branch 1 10)
+;                                                                  (make-branch 2 5)))))
+;              (make-branch 2 
+;                           (make-mobile (make-branch 1 15)
+;                                        (make-branch 1 15)))))
+
+;; ---------------------------------------------------
+(define (scale-tree tree factor)
+  (cond ((null? tree) nil)
+        ((not (pair? tree)) (* tree factor))
+        (else (cons (scale-tree (car tree) factor)
+                    (scale-tree (cdr tree) factor)))))
+
+(define (scale-tree tree factor)
+  (map (lambda (sub-tree)
+         (if (pair? sub-tree)
+             (scale-tree sub-tree factor)
+             (* sub-tree factor)))
+       tree))
+
+;;-- 2.30 -----------------------------------
+(define (square-tree tree)
+  (map (lambda (sub-tree)
+         (if (pair? sub-tree)
+             (square-tree sub-tree)
+             (* sub-tree sub-tree)))
+       tree))
+
+;(square-tree
+; (list 1
+;       (list 2 (list 3 4) 5)
+;       (list 6 7)))
+
+;; -- 2.31 ---------------------------------
+(define (tree-map fn tree)
+  (map (lambda (sub-tree)
+         (if (pair? sub-tree)
+             (tree-map fn sub-tree)
+             (fn sub-tree)))
+       tree))
+
+(define (square-tree tree)
+  (tree-map square tree))
+
+;; -- 2.32 --------------------------------
+
+(define (subsets s)
+  (if (null? s)
+      (list nil)
+      (let ((rest (subsets (cdr s))))
+        (append rest (map (lambda (ss)(cons (car s) ss) )  rest)))))
+;; -- 2.33 --------------------------------
+(define (accumulate op initial sequence)
+  (if (null? sequence)
+      initial
+      (op (car sequence)
+          (accumulate op initial (cdr sequence)))))
+
+(define (my-map p sequence)
+  (accumulate (lambda (x y) (cons (p x) y)) nil sequence))
+
+(define (my-append seq1 seq2)
+  (accumulate cons seq2 seq1))
+
+(define (my-length sequence)
+  (accumulate (lambda (x y) (+ 1 y)) 0 sequence))
+
+;; -- 2.34 --------------------------------
+(define (horner-eval x coefficient-sequence)
+  (accumulate (lambda (this-coeff higher-terms) h??i)
+              0
+              coefficient-sequence))
+
+;; 1 + 3*x + 5*x^3 + x^5
+;; (((((x + 0) * x + 5) * x + 0) * x + 3) * x + 1)
+
+
+
+(horner-eval 2 (list 1 3 0 5 0 1))
