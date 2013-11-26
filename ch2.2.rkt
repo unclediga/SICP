@@ -275,13 +275,30 @@
 
 ;; -- 2.34 --------------------------------
 (define (horner-eval x coefficient-sequence)
-  (accumulate (lambda (this-coeff higher-terms) h??i)
+  (accumulate (lambda (this-coeff higher-terms) 
+                (+ this-coeff
+                   (* x higher-terms)))
               0
               coefficient-sequence))
 
 ;; 1 + 3*x + 5*x^3 + x^5
-;; (((((x + 0) * x + 5) * x + 0) * x + 3) * x + 1)
+;; (((((x * 1 + 0) * x + 5) * x + 0) * x + 3) * x + 1)
 
+;;(horner-eval 2 (list 1 3 0 5 0 1))
+;; -- 2.35 ---------------------------------
 
+(define (count-leaves t)
+  (accumulate + 0 (map (lambda (x)
+                         (cond ((null? x) 0)
+                               ((not (pair? x)) 1)
+                               (else (count-leaves x)))) 
+                       t)))
 
-(horner-eval 2 (list 1 3 0 5 0 1))
+;; -- 2.36 ---------------------------------
+(define (accumulate-n op init seqs)
+  (if (null? (car seqs))
+      nil
+      (cons (accumulate op init (map car seqs))
+            (accumulate-n op init (accumulate cons nil (map cdr seqs))))))
+
+;;(accumulate-n + 0 '((1 2 3) (4 5 6) (7 8 9) (10 11 12)))
