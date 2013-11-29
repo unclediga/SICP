@@ -301,4 +301,174 @@
       (cons (accumulate op init (map car seqs))
             (accumulate-n op init (accumulate cons nil (map cdr seqs))))))
 
-;;(accumulate-n + 0 '((1 2 3) (4 5 6) (7 8 9) (10 11 12)))
+;;(accumulate-n + 0 '((1 2 3) (4 5 6) (7 8 9) (10 11 12))) => (22 26 30)
+;; -- 2.37 ---------------------------------
+(define (dot-product v w)
+  (accumulate + 0 (map * v w)))
+
+(define (matrix-*-vector m v)
+  (map (lambda(row)(dot-product row v)) m))
+
+(define (transpose mat)
+  (accumulate-n cons '() mat))
+
+(define (matrix-*-matrix m n)
+  (let ((cols (transpose n)))
+    (map (lambda(x)(accumulate cons nil 
+                               (map (lambda(y) (dot-product x y)) n))) m)))
+
+;; -- 2.38 --------------------------------
+(define (fold-left op initial sequence)
+  (define (iter result rest)
+    (if (null? rest)
+        result
+        (iter (op result (car rest))
+              (cdr rest))))
+  (iter initial sequence))
+
+;; fold-right == accumulate
+(define (fold-right op initial sequence)
+  (accumulate op initial sequence))
+
+;;Каковы значения следующих выражений?
+;(fold-right / 1 (list 1 2 3)) => 1.5
+
+;(fold-left / 1 (list 1 2 3)) => 1/6
+;(fold-right list nil (list 1 2 3)) => (1 (2 (3 ())))
+;(fold-left list nil (list 1 2 3)) => (((() 1) 2) 3)
+
+;; -- 2.39 --------------------------------
+(define (reverse-right sequence)
+  (fold-right (lambda (x y) (append y (cons x nil))) nil sequence))
+
+(define (reverse-left sequence)
+  (fold-left (lambda (x y) (cons y x)) nil sequence))
+;; ----------------------------------------------------
+(define (enumerate-interval n1 n2)
+  (cond ((> n1 n2) nil)
+        (else (cons n1 (enumerate-interval (+ n1 1) n2)))))
+
+;(accumulate append
+;            nil
+;            (map (lambda (i)
+;                   (map (lambda (j) (list i j))
+;                        (enumerate-interval 1 (- i 1))))
+;                 (enumerate-interval 1 n)))
+
+(define (flatmap proc seq)
+  (accumulate append nil (map proc seq)))
+
+;(flatmap (lambda (i)
+;                   (map (lambda (j) (list i j))
+;                        (enumerate-interval 1 (- i 1))))
+;           (enumerate-interval 1 4))
+
+(define (prime-sum? pair)
+  ;;(prime? (+ (car pair) (cadr pair))))
+  (even? (+ (car pair) (cadr pair))))
+
+(define (make-pair-sum pair)
+  (list (car pair) (cadr pair) (+ (car pair) (cadr pair))))
+
+(define (prime-sum-pairs n)
+  (map make-pair-sum
+       (filter prime-sum?
+               (flatmap
+                (lambda (i)
+                  (map (lambda (j) (list i j))
+                       (enumerate-interval 1 (- i 1))))
+                (enumerate-interval 1 n)))))
+
+(define (filter predicate sequence)
+  (cond ((null? sequence) nil)
+        ((predicate (car sequence))
+         (cons (car sequence)
+               (filter predicate (cdr sequence))))
+        (else (filter predicate (cdr sequence)))))
+
+(define (remove item sequence)
+  (filter (lambda (x) (not (= x item)))
+          sequence))
+
+(define (permutations s)
+  (if (null? s) ; пустое множество?
+      (list nil) ; последовательность,
+      ; содержащая пустое множество
+      (flatmap (lambda (x)
+                 (map (lambda (p) (cons x p))
+                      (permutations (remove x s))))
+               s)))
+;; -- 2.40 --------------------------------
+(define (unique-pairs n)
+  (if (null? n) nil
+      (flatmap (lambda (x)
+                 (map (lambda(y)(list x y)) 
+                      (enumerate-interval x n)))
+               (enumerate-interval 1 n))))
+
+(define (prime-sum-pairs n)
+  (map make-pair-sum
+       (filter prime-sum?
+               (unique-pairs n))))
+
+;; -- 2.41 --------------------------------
+;; (flatmap car '(((1) 2)((3) 4)((5)))) => (1 3 5)
+;;     (map car '((1 2) (3 4) (5)))     => (1 3 5)
+;;TO-DO  NOT UNIQUE !!!
+(define (unique-troyka n)
+  (if (null? n) nil
+      (flatmap (lambda (x)
+                 (map (lambda(y)(if (not (=(car x) y)) 
+                                    (cons y x))) 
+                      (enumerate-interval 1 n)))
+               (unique-pairs n))))
+
+(define (make-troyka-sum troyka)
+  (list (car troyka) 
+        (cadr troyka)
+        (caddr troyka)
+        (+ (car troyka) 
+           (cadr troyka)
+           (caddr troyka))))
+
+(define (find-troyka n s) 
+  (filter (lambda(x)(< (cadddr x) s))
+          (map make-troyka-sum
+               (unique-troyka n))))
+
+
+;; FROM http://sicp.sergeykhenkin.com/2008/01/31/sicp-exercise-solution-2-41/
+(define (unique-triples n)
+    (flatmap (lambda (i)
+          (flatmap (lambda (j)
+                (map (lambda (k) (list i j k))
+                     (enumerate-interval 1 (- j 1))))
+                   (enumerate-interval 1 (- i 1))))
+             (enumerate-interval 1 n)))
+
+(define (triples-with-sum s n)
+  (filter (lambda (t) (= (accumulate + 0 t) s))
+          (unique-triples n)))
+
+
+;; -- 2.42 --------------------------------
+;; TO-DO
+(define (safe? k pos) nil)
+(define (empty-board) nil)
+(define (adjoin-position new-row k rest-of-queens) nil)
+
+
+(define (queens board-size)
+  (define (queen-cols k)
+    (if (= k 0)
+        (list empty-board)
+        (filter
+         (lambda (positions) (safe? k positions))
+         (flatmap
+          (lambda (rest-of-queens)
+            (map (lambda (new-row)
+                   (adjoin-position new-row k rest-of-queens))
+                 (enumerate-interval 1 board-size)))
+          (queen-cols (- k 1))))))
+  (queen-cols board-size))
+;; -- 2.43 --------------------------------
