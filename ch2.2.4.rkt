@@ -1,7 +1,7 @@
 #lang racket
 ;; Для графонов нужна эта библиотека
 (require (planet soegaard/sicp:2:1/sicp))
-; Картинку клади вместе с исходников
+; Картинку клади вместе с исходниками
 ;(define bart 
 ;  (load-painter 
 ;   (build-path (current-directory)
