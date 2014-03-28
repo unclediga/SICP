@@ -1,3 +1,0 @@
-#lang racket
-(require (planet soegaard/sicp:2:1/sicp))
-(paint (number->painter 0))
