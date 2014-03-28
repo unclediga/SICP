@@ -363,6 +363,13 @@
 ;                        (enumerate-interval 1 (- i 1))))
 ;           (enumerate-interval 1 4))
 
+;(map (lambda (i) (list i ))
+;           (enumerate-interval 1 4))
+; RESULT map: ((1) (4) (9) (16))
+;(flatmap (lambda (i) (list i))
+;           (enumerate-interval 1 4))
+; RESULT flatmap: (1 4 9 16)
+
 (define (prime-sum? pair)
   ;;(prime? (+ (car pair) (cadr pair))))
   (even? (+ (car pair) (cadr pair))))
@@ -439,12 +446,12 @@
 
 ;; FROM http://sicp.sergeykhenkin.com/2008/01/31/sicp-exercise-solution-2-41/
 (define (unique-triples n)
-    (flatmap (lambda (i)
-          (flatmap (lambda (j)
-                (map (lambda (k) (list i j k))
-                     (enumerate-interval 1 (- j 1))))
-                   (enumerate-interval 1 (- i 1))))
-             (enumerate-interval 1 n)))
+  (flatmap (lambda (i)
+             (flatmap (lambda (j)
+                        (map (lambda (k) (list i j k))
+                             (enumerate-interval 1 (- j 1))))
+                      (enumerate-interval 1 (- i 1))))
+           (enumerate-interval 1 n)))
 
 (define (triples-with-sum s n)
   (filter (lambda (t) (= (accumulate + 0 t) s))
@@ -453,9 +460,15 @@
 
 ;; -- 2.42 --------------------------------
 ;; TO-DO
-(define (safe? k pos) nil)
-(define (empty-board) nil)
-(define (adjoin-position new-row k rest-of-queens) nil)
+(define (safe? k pos) 
+  (and (safe-up? k pos)
+       (safe-down? k pos)
+       (safe-str? k pos)))
+
+
+  (define empty-board '())
+(define (adjoin-position new-row k rest-of-queens) 
+  (append (list new-row) rest-of-queens))
 
 
 (define (queens board-size)
