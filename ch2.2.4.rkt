@@ -11,18 +11,18 @@
 ;(paint (beside einstein (flip-vert einstein)))
 
 ;; -- 2.44------------------------------
-(define (up-split painter n)
-  (if (= n 0)
-  painter
-  (let ((smaller (up-split painter (- n 1))))
-    (below painter (beside smaller smaller)))))
+;(define (up-split painter n)
+;  (if (= n 0)
+;  painter
+;  (let ((smaller (up-split painter (- n 1))))
+;    (below painter (beside smaller smaller)))))
 
 ;;-------------------------------------
-(define (right-split painter n)
-  (if (= n 0)
-      painter
-      (let ((smaller (right-split painter (- n 1))))
-        (beside painter (below smaller smaller)))))
+;(define (right-split painter n)
+;  (if (= n 0)
+;      painter
+;      (let ((smaller (right-split painter (- n 1))))
+;        (beside painter (below smaller smaller)))))
 
 (define (corner-split painter n)
   (if (= n 0)
@@ -34,3 +34,11 @@
               (corner (corner-split painter (- n 1))))
           (beside (below painter top-left)
                   (below bottom-right corner))))))
+
+;;-- 2.45 --------------
+(define (split f1 f2)
+  (lambda (v)
+    (f1 v (f2 v v))))
+
+(define right-split (split beside below))
+(define up-split (split below beside))
