@@ -1,4 +1,4 @@
-;; newton
+;; Задача про вычисление квадратного корня методом Ньютона
 (define (sqrt-iter guess x)
   (if (good-enough? guess x)
       guess
@@ -19,7 +19,7 @@
 (define (square x)
   (* x x))
 
-;; 1.6 Parker and IF
+;; Упр. 1.6 Паркер и спецформа if
 (define (new-if predicate then-clause else-clause)
   (cond (predicate then-clause)
         (else else-clause)))
@@ -36,7 +36,7 @@
 (define (my-sqrt2 x)
   (sqrt-iter2 1.0 x))
 
-;; 1.7.
+;; Упражнение 1.7.
 
 (define (good-enough_v2.0? guess prev-guess x)
   (< (abs (- prev-guess guess)) 0.0001))
@@ -50,7 +50,7 @@
 (define (my-sqrt_v2.0 x)
   (sqrt-iter_v2.0 1.0 0.0 x))
 
-;; 1.8.
+;; Упражнение 1.8.
 
 (define (cube x)
   (* x x x))
