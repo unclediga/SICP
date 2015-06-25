@@ -57,7 +57,7 @@
 
 ;; -- 2.56 ----------------
 
-(define (deriv2 exp var)
+(define (deriv3 exp var)
   (cond ((number? exp) 0)
         ((variable? exp)
          (if (same-variable? exp var) 1 0))
@@ -73,16 +73,23 @@
         ;; new 
         ((exponentiation? exp)
          (make-product (exponent exp)
-                       (make-exponent (deriv2 (base exp) var) 
-                                      (- (exponent exp) 1))))
+                       (make-exponent (base exp) (- (exponent exp) 1))))
          (else
-         (error "неизвестный тип выражения -- DERIV" exp))))  
+         (error "неизв. тип выражения DERIV2 [" exp "]"))))
 
 (define (exponentiation? exp)
   (and (pair? exp) (eq? (car exp) '^)))
 
 (define (make-exponent base exponent)
-  (list '^ base exponent))
+  (cond
+   ((= exponent 0) 1)
+   ((= exponent 1) base)
+   ((number? base)
+    (cond
+     ((= base 1) 1)
+     ((> base 0) (* base (make-exponent base (- exponent 1))))
+     (#t (list '^ base exponent))))
+   (#t (list '^ base exponent))))
 
 (define (exponent exp)
   (caddr exp))
