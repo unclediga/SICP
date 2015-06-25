@@ -57,18 +57,18 @@
 
 ;; -- 2.56 ----------------
 
-(define (deriv3 exp var)
+(define (deriv2 exp var)
   (cond ((number? exp) 0)
         ((variable? exp)
          (if (same-variable? exp var) 1 0))
         ((sum? exp)
-         (make-sum (deriv (addend exp) var)
-                   (deriv (augend exp) var)))
+         (make-sum (deriv2 (addend exp) var)
+                   (deriv2 (augend exp) var)))
         ((product? exp)
          (make-sum
           (make-product (multiplier exp)
-                        (deriv (multiplicand exp) var))
-          (make-product (deriv (multiplier exp) var)
+                        (deriv2 (multiplicand exp) var))
+          (make-product (deriv2 (multiplier exp) var)
                         (multiplicand exp))))
         ;; new 
         ((exponentiation? exp)
