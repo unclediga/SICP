@@ -99,8 +99,15 @@
 
 ;; -- 2.57 ----------------
 
-(define (augend s) 
-  (cond ((pair?(cdddr s)) (cons (car s) (cddr s)))
-        (else
-         (caddr s))))
+(define (augend s)
+  (let ((s1 (cddr s)))
+    (if (> (length s1) 1)
+	(cons '+ s1)
+	(car s1))))
+	
 
+(define (multiplicand p)
+  (let ((p1 (cddr p)))
+    (if (> (length p1) 1)
+	(cons '* p1)
+	(car p1))))
