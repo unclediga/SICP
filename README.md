@@ -6,6 +6,11 @@
 ----
 #### Harold Abelson, Gerald Jay Sussman. "Structure and Interpretation of Computer Programs"
 ----
+
+Чтобы не забыть: 
+ * Eli Bendersky's website  : http://eli.thegreenplace.net/tag/sicp
+ * SICP по-русски  : http://sicp.sergeykhenkin.com/sicp-exercise-solutions/
+
 #### 1. Построение абстракций с помощью процедур
 
 #####1.1. Элементы программирования
