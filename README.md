@@ -3,19 +3,67 @@
 ----
 
 #### Харольд Абельсон, Джеральд Джей Сассман. "Структура и интерпретация компьютерных программ".
-----
 #### Harold Abelson, Gerald Jay Sussman. "Structure and Interpretation of Computer Programs"
+
 ----
 
-Чтобы не забыть: 
+Structure and Interpretation of Computer Programs (SICP) by Abelson & Sussman
+
+[The site - companion](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html)
+
+[The complete text in HTML](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book.html)
+
+
+Electronic versions with newly typeset mathematics and figures:
+[Link](https://sicpebook.wordpress.com/ebook/)
+
+- [HTML5](http://sarabander.github.io/sicp/), [EPUB3](https://www.dropbox.com/s/y9jt5kmabt02yg8/sicp.epub?dl=0), [repo](https://github.com/sarabander/sicp)
+
+- [PDF](https://github.com/sarabander/sicp-pdf/blob/master/sicp.pdf?raw=true), [repo](https://github.com/sarabander/sicp-pdf)
+
+- [Pocket format PDFs](https://github.com/sarabander/sicp-pocket)
+
+
+Дополнительные материалы:
+
+- [Полная спецификация языка R5RS](https://bmstu-iu9.github.io/scheme-labs/r5rs.pdf)
+- [Абельсон, Сассман «Структура и интерпретация компьютерных программ» /RUS /PDF](https://bmstu-iu9.github.io/scheme-labs/sicp.pdf)
+
+
+
+Отличные форматы для чтения на наладошниках.
+
+#### Ссылки на Scheme-сайты, всякие papers и прочее.
+
+###### *Чтобы не забыть:*
+ * Почти официальные! Полный комплект:) : http://community.schemewiki.org/?sicp-solutions
  * Eli Bendersky's website  : http://eli.thegreenplace.net/tag/sicp
  * SICP по-русски  : http://sicp.sergeykhenkin.com/sicp-exercise-solutions/
+
+###### *Глянуть оформление репы и тесты:*
+ * SICP exercises Barry Allison (последнее Exercise 4.76 /23rd July, 2018) : https://wizardbook.wordpress.com/ 
+ * Последнее 3.82 23/08/2016 : https://github.com/sarabander/p2pu-sicp
+
+###### *Доп:*
+ * Ivan Ivanov's Weblog (На Главе 3 остановился) : https://ivanovivan.wordpress.com/category/project-sicp
+ * Ken Dyck (2.13 последнее) https://kendyck.com/2007/10/24/solution-to-sicp-exercise-213/
+
+
+
+##### Scheme implementations
+- [MIT/GNU Scheme](http://groups.csail.mit.edu/mac/projects/scheme/)
+- [Racket: a Scheme superset](http://www.racket-lang.org/)
+- [SISC with online REPL](http://sisc-scheme.org/)
+- [Chez Scheme](http://www.scheme.com/)
+- [Gambit](http://dynamo.iro.umontreal.ca/~gambit/wiki/index.php/Main_Page)
+- [Chicken](http://www.call-cc.org/)                                                                 
+
 
 #### 1. Построение абстракций с помощью процедур
 
 ##### 1.1. Элементы программирования
 
-###### *1.1.1. Выражения*
+###### 1.1.1. Выражения
 
 ###### *1.1.2. Имена и окружение*
 
@@ -33,17 +81,17 @@
 - [ ] Упражнение 1.4.
 - [ ] Упражнение 1.5.
 
-######* 1.1.7. Пример: вычисление квадратного корня методом Ньютона*
+###### *1.1.7. Пример: вычисление квадратного корня методом Ньютона*
 
 - [ ] Упражнение 1.6.
 - [x] [Упражнение 1.7.](ch1.1.7.rkt)
 - [x] [Упражнение 1.8.](ch1.1.7.rkt)
 
-###### * 1.1.8. Процедуры как абстракции типа <черный ящик>*
+###### *1.1.8. Процедуры как абстракции типа "черный ящик"*
 
 ##### 1.2. Процедуры и порождаемые ими процессы
 
-######* 1.2.1. Линейные рекурсия и итерация*
+###### *1.2.1. Линейные рекурсия и итерация*
 
 - [ ] Упражнение 1.9.
 - [ ] Упражнение 1.10.
@@ -126,7 +174,7 @@
 - [x] [Упражнение 2.2.](ch2.1.rkt)
 - [ ] Упражнение 2.3.
 
-###### *2.1.3. Что значит слово <данные>?*
+###### *2.1.3. Что значит слово "данные"?*
 
 - [x] [Упражнение 2.4.](ch2.1.rkt)
 - [x] [Упражнение 2.5.](ch2.1.rkt)
