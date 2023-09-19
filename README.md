@@ -171,7 +171,7 @@ Electronic versions with newly typeset mathematics and figures:
 
 ###### *2.1.2. Барьеры абстракции*
 
-- [ ] [Упражнение 2.2.](ch2.1.rkt)
+- [x] [Упражнение 2.2.](chapter2/ex2.2.rkt)
 - [ ] Упражнение 2.3.
 
 ###### *2.1.3. Что значит слово "данные"?*
