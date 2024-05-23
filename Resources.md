@@ -10,13 +10,19 @@ Electronic versions with newly typeset mathematics and figures:
 
 - [Pocket format PDFs](https://github.com/sarabander/sicp-pocket)
 
+- [SICP JavaScript Edition](https://github.com/source-academy/sicp)
+
 
 Дополнительные материалы:
 
 - [Полная спецификация языка R5RS](https://bmstu-iu9.github.io/scheme-labs/r5rs.pdf)
 - [Абельсон, Сассман «Структура и интерпретация компьютерных программ» /RUS /PDF](https://bmstu-iu9.github.io/scheme-labs/sicp.pdf)
+  Отличные форматы для чтения на наладошниках.
+- [habr.com: Как прорешать SICP: Отчёт о создании решебника](https://habr.com/ru/articles/542226/)
+- [Сам решебник с ответами от Vladimir Nikishkin](https://gitlab.com/Lockywolf/chibi-sicp)
+- [The Scheme Programming Language, 4th edition (TSPL book)](http://community.schemewiki.org/?TSPL)
+- [The Scheme Programming Language, 3th edition (TSPL book)](https://www.scheme.com/tspl3/)
 
-Отличные форматы для чтения на наладошниках.
 
 #### Ссылки на Scheme-сайты, всякие papers и прочее.
 
