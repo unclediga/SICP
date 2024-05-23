@@ -7,72 +7,22 @@
 
 ----
 
-Structure and Interpretation of Computer Programs (SICP) by Abelson & Sussman
-
-[The site - companion](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/index.html)
+[Structure and Interpretation of Computer Programs (SICP) by Abelson & Sussman // archived](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/655/sicp.zip/index.html)
 
 [The complete text in HTML](https://mitp-content-server.mit.edu/books/content/sectbyfn/books_pres_0/6515/sicp.zip/full-text/book/book.html)
 
 
-Electronic versions with newly typeset mathematics and figures:
-[Link](https://sicpebook.wordpress.com/ebook/)
+см. [Ресурсы](Resources.md)
 
-- [HTML5](http://sarabander.github.io/sicp/), [EPUB3](https://www.dropbox.com/s/y9jt5kmabt02yg8/sicp.epub?dl=0), [repo](https://github.com/sarabander/sicp)
-
-- [PDF](https://github.com/sarabander/sicp-pdf/blob/master/sicp.pdf?raw=true), [repo](https://github.com/sarabander/sicp-pdf)
-
-- [Pocket format PDFs](https://github.com/sarabander/sicp-pocket)
-
-
-Дополнительные материалы:
-
-- [Полная спецификация языка R5RS](https://bmstu-iu9.github.io/scheme-labs/r5rs.pdf)
-- [Абельсон, Сассман «Структура и интерпретация компьютерных программ» /RUS /PDF](https://bmstu-iu9.github.io/scheme-labs/sicp.pdf)
-
-
-
-Отличные форматы для чтения на наладошниках.
-
-#### Ссылки на Scheme-сайты, всякие papers и прочее.
-
-###### *Чтобы не забыть:*
- * Почти официальные! Полный комплект:) : http://community.schemewiki.org/?sicp-solutions
- * Eli Bendersky's website  : http://eli.thegreenplace.net/tag/sicp
- * SICP по-русски  : http://sicp.sergeykhenkin.com/sicp-exercise-solutions/
-
-###### *Глянуть оформление репы и тесты:*
- * SICP exercises Barry Allison (последнее Exercise 4.76 /23rd July, 2018) : https://wizardbook.wordpress.com/ 
- * Последнее 3.82 23/08/2016 : https://github.com/sarabander/p2pu-sicp
-
-###### *Доп:*
- * Ivan Ivanov's Weblog (На Главе 3 остановился) : https://ivanovivan.wordpress.com/category/project-sicp
- * Ken Dyck (2.13 последнее) https://kendyck.com/2007/10/24/solution-to-sicp-exercise-213/
-
-
-
-##### Scheme implementations
-- [MIT/GNU Scheme](http://groups.csail.mit.edu/mac/projects/scheme/)
-- [Racket: a Scheme superset](http://www.racket-lang.org/)
-- [SISC with online REPL](http://sisc-scheme.org/)
-- [Chez Scheme](http://www.scheme.com/)
-- [Gambit](http://dynamo.iro.umontreal.ca/~gambit/wiki/index.php/Main_Page)
-- [Chicken](http://www.call-cc.org/)                                                                 
-
+-----
 
 #### 1. Построение абстракций с помощью процедур
-
 ##### 1.1. Элементы программирования
-
 ###### 1.1.1. Выражения
-
 ###### *1.1.2. Имена и окружение*
-
 ###### *1.1.3. Вычисление комбинаций*
-
 ###### *1.1.4. Составные процедуры*
-
 ###### *1.1.5. Подстановочная модель применения процедуры*
-
 ###### *1.1.6. Условные выражения и предикаты*
 
 - [ ] Упражнение 1.1.
@@ -83,7 +33,7 @@ Electronic versions with newly typeset mathematics and figures:
 
 ###### *1.1.7. Пример: вычисление квадратного корня методом Ньютона*
 
-- [ ] Упражнение 1.6.
+- [x] [Упражнение 1.6.](ch1\ch1.1.6.rkt)
 - [x] [Упражнение 1.7.](ch1\ch1.1.7.rkt)
 - [x] [Упражнение 1.8.](ch1\ch1.1.7.rkt)
 
@@ -763,3 +713,5 @@ Electronic versions with newly typeset mathematics and figures:
 - [ ] Упражнение 5.50.
 - [ ] Упражнение 5.51.
 - [ ] Упражнение 5.52.
+
+
